@@ -193,27 +193,21 @@ step() {
   move_ch=()
   age=()
   max_age=()
+  energy=()
+  predator=()
   alive_list=()  # Rebuild the active list fresh each tick
 
-  for ((i=0;i<grid_size;i++)); do
-    if (( n_alive[$i] == 1 )); then
-      alive[$i]=1
-      sym[$i]="${n_sym[$i]}"
-      col[$i]="${n_col[$i]}"
-      repro[$i]="${n_repro[$i]}"
-      move_ch[$i]="${n_move_ch[$i]}"
-      age[$i]="${n_age[$i]}"
-      max_age[$i]="${n_max_age[$i]}"
-      energy[$i]="${n_energy[$i]}"
-      predator[$i]="${n_predator[$i]}"
-      food[$i]=${food[$i]}  # Preserve food if not overwritten
-      alive_list+=("$i")  # Add to active list for next tick
-    else
-      alive[$i]=0
-      energy[$i]=0
-      predator[$i]=0
-      if (( food[$i] != 1 )); then food[$i]=0; fi
-    fi
+  for i in "${!n_alive[@]}"; do
+    alive[$i]=1
+    sym[$i]="${n_sym[$i]}"
+    col[$i]="${n_col[$i]}"
+    repro[$i]="${n_repro[$i]}"
+    move_ch[$i]="${n_move_ch[$i]}"
+    age[$i]="${n_age[$i]}"
+    max_age[$i]="${n_max_age[$i]}"
+    energy[$i]="${n_energy[$i]}"
+    predator[$i]="${n_predator[$i]}"
+    alive_list+=("$i")  # Add to active list for next tick
   done
 
   # --- Food lifecycle & regrow ---
