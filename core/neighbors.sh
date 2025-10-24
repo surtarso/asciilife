@@ -18,7 +18,7 @@ neighbors() {
 choose_empty_neighbor() {
   local i=$1 nlist=( $(neighbors "$i") ) empties=()
   for idxn in "${nlist[@]}"; do
-    (( alive[$idxn]==0 && n_alive[$idxn]==0 )) && empties+=( "$idxn" )
+    (( alive[$idxn]==0 && n_alive[$idxn]==0 && terrain[$idxn]!=1 )) && empties+=( "$idxn" )
   done
   (( ${#empties[@]} == 0 )) && echo -1 || echo "${empties[$(rand ${#empties[@]})]}"
 }

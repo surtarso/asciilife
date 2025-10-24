@@ -19,15 +19,12 @@ draw() {
         ccode="${col[$i]}"
         # Add color escape and character
         out+=$'\033['"${ccode}"'m'"${ch}"$'\033[0m'
+      elif (( food[$i] == 1 )); then
+        out+=$'\033['"${FOOD_COLOR}"'m'"${FOOD_SYMBOL}"$'\033[0m'
+      elif (( terrain[$i] == 1 )); then
+        out+=$'\033['"${WATER_COLOR}"'m'"${WATER_SYMBOL}"$'\033[0m'
       else
-        if (( food[$i] == 1 )); then
-            out+=$'\033['"${FOOD_COLOR}"'m'"${FOOD_SYMBOL}"$'\033[0m'
-        # PLACEHOLDER FOR TERRAIN COLLISION
-        elif (( terrain[$i] == 1 )); then
-            out+=$'\033['"${WATER_COLOR}"'m'"${WATER_SYMBOL}"$'\033[0m'
-        else
-            out+=" " # empty space
-        fi
+        out+=" " # empty space
       fi
     done
     printf '%s\n' "$out"
