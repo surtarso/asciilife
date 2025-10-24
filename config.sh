@@ -26,6 +26,7 @@ HERBIVOR_SPEED_NIGHT=10  # subtracts from normal speed (cur_move - HERBIVOR_SPEE
 # SYMBOLS=("🐇" "🐄" "🐐" "🐑" "🦌" "🦙")
 SYMBOLS=("Ø" "©" "ø" "ð" "®")
 COLORS=(33 35 36 37 38)
+MUTATE_PREDATOR_CHANCE=1
 
 # Predation
 PREDATOR_SPEED_DAY=10     # subtracts to normal speed (cur_move - PREDATOR_SPEED_DAY)

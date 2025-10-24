@@ -23,3 +23,14 @@ mutate_color() {
   local c=$1
   (( $(rand 100) < MUTATION_RATE )) && echo "${COLORS[$(rand ${#COLORS[@]})]}" || echo "$c"
 }
+
+mutate_predator() {
+  local p=$1 # current predator status (0 or 1)
+  local MUTATE_PREDATOR_CHANCE=1 # Small chance to flip type
+  if (( $(rand 100) < MUTATE_PREDATOR_CHANCE )); then
+    local new_p=$(( 1 - p ))
+    echo "$new_p"
+  else
+    echo "$p"
+  fi
+}

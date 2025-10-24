@@ -144,6 +144,18 @@ step() {
 
           local child_sym=$(mutate_symbol "$cur_sym")
           local child_col=$(mutate_color "$cur_col")
+          local child_pred=$(mutate_predator "$cur_pred")
+
+          # Handle symbol and color change if it became a predator/herbivore
+          if (( child_pred != cur_pred )); then
+              if (( child_pred == 1 )); then
+                  child_sym="${PREDATOR_SYMBOL[$(rand ${#PREDATOR_SYMBOL[@]})]}"
+                  child_col=$PREDATOR_COLOR
+              else
+                  child_sym="${SYMBOLS[$(rand ${#SYMBOLS[@]})]}"
+                  child_col="${COLORS[$(rand ${#COLORS[@]})]}"
+              fi
+          fi
 
           # Place child in next state; ensure we don't overwrite an existing placement
           if (( n_alive[$child_pos] != 1 )); then
@@ -155,7 +167,7 @@ step() {
             n_age[$child_pos]=0
             n_max_age[$child_pos]="$child_max"
             n_energy[$child_pos]="$cur_energy"
-            n_predator[$child_pos]="$cur_pred"
+            n_predator[$child_pos]="$child_pred"
           fi
         fi
       fi
