@@ -17,6 +17,11 @@ draw() {
       if (( alive[$i] == 1 )); then
         ch="${sym[$i]}"
         ccode="${col[$i]}"
+        # blinking wont work on this speeds
+        # blink=""
+        # if (( energy[$i] < ENERGY_MAX / 5 )); then
+        #   blink=";5"  # ANSI blink
+        # fi
         # Add color escape and character
         out+=$'\033['"${ccode}"'m'"${ch}"$'\033[0m'
       elif (( food[$i] == 1 )); then
