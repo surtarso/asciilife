@@ -55,7 +55,7 @@ seed_initial
 
 # --- Main loop ---
 main_loop() {
-  local key
+  local key paused=0
   while true; do
     # handle user input (non-blocking)
     if read -r -n1 -t 0.001 key 2>/dev/null; then
@@ -64,32 +64,46 @@ main_loop() {
         for ((i=0;i<grid_size;i++)); do alive[$i]=0; done
         seed_initial
       }
+      [[ "$key" == "p" || "$key" == "P" ]] && {
+        (( paused = 1 - paused ))
+        if (( paused == 1 )); then
+          tput cup $GRID_H 0
+          printf "\033[1;33mPaused (press 'p' to resume)\033[0m\n"
+        else
+          clear  # Redraw on resume
+          draw
+        fi
+      }
     fi
 
-    # --- Simulation step & render ---
-    step
-    draw
+    if (( paused == 0 )); then
+      # --- Simulation step & render ---
+      step
+      draw
 
-    # --- Check for extinction ---
-    local pop=0
-    for ((i=0;i<grid_size;i++)); do
-      (( alive[$i] == 1 )) && (( pop++ ))
-    done
+      # --- Check for extinction ---
+      local pop=0
+      for ((i=0;i<grid_size;i++)); do
+        (( alive[$i] == 1 )) && (( pop++ ))
+      done
 
-    if (( pop == 0 )); then
-      tput cup $GRID_H 0
-      printf "\033[1;31mASCII EXTINCTION! Reseeding...\033[0m\n"
-      sleep 1
-      for ((i=0;i<grid_size;i++)); do alive[$i]=0; done
-      seed_initial
+      if (( pop == 0 )); then
+        tput cup $GRID_H 0
+        printf "\033[1;31mASCII EXTINCTION! Reseeding...\033[0m\n"
+        sleep 1
+        for ((i=0;i<grid_size;i++)); do alive[$i]=0; done
+        seed_initial
+      fi
+
+      sleep "$TICK_SLEEP"
+    else
+      sleep 0.1  # Light sleep while paused to check keys
     fi
-
-    sleep "$TICK_SLEEP"
   done
 }
 
 tput cup $GRID_H 0
-printf "\033[1;32mASCII Life Simulator\033[0m\nInitial pop: %d in %dx%d grid.\nPress 'q' to quit, 'r' to reseed.\n" "$INIT_POPULATION" "$GRID_W" "$GRID_H" 
+printf "\033[1;32mASCII Life Simulator\033[0m\nInitial pop: %d in %dx%d grid.\nPress 'q' to quit, 'r' to reseed, 'p' to pause.\n" "$INIT_POPULATION" "$GRID_W" "$GRID_H" 
 sleep 3
 main_loop
 cleanup_and_exit
