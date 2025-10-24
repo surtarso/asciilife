@@ -123,19 +123,21 @@ step() {
       fi
 
       # 3) Reproduction: maybe create a child in an empty neighboring cell
-      if (( died == 0 )) && (( cur_energy > ENERGY_REPRO_COST )) && (( $(rand 100) < cur_repro )); then
+      local parent_repro_chance=$cur_repro # Use a temp variable for the check
+      if (( IS_DAY == 0 )); then
+        parent_repro_chance=$(( cur_repro + (cur_repro / 2) )) # Example: 50% night boost
+      fi
+      # Clamp the temporary chance
+      (( parent_repro_chance < 1 )) && parent_repro_chance=1
+      (( parent_repro_chance > 100 )) && parent_repro_chance=100
+
+      if (( died == 0 )) && (( cur_energy > ENERGY_REPRO_COST )) && (( $(rand 100) < parent_repro_chance )); then
         cur_energy=$(( cur_energy - ENERGY_REPRO_COST ))
         child_pos=$(choose_empty_neighbor "$i")
         if (( child_pos >= 0 )); then
-          # child's genome is a (possibly mutated) copy
+          # child's genome is a (possibly mutated) copy - use the un-boosted cur_repro value!
           local child_repro=$(mutate_numeric "$cur_repro")
-          
-          if (( IS_DAY == 0 )); then
-            cur_repro=$(( cur_repro * 2 ))  # raise reproduction at night
-          fi
-          # clamp child_repro to 1..100
-          if (( child_repro < 1 )); then child_repro=1; fi
-          if (( child_repro > 100 )); then child_repro=100; fi
+
           local child_move=$(mutate_numeric "$cur_move")
           if (( child_move < 1 )); then child_move=1; fi
           if (( child_move > 100 )); then child_move=100; fi
