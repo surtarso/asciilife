@@ -17,6 +17,8 @@ step() {
   n_move_ch=()
   n_age=()
   n_max_age=()
+  n_energy=()
+  n_predator=()
 
   # iterate all current cells
 #   for ((i=0;i<grid_size;i++)); do
@@ -228,7 +230,11 @@ step() {
         food_age[$i]=0
         else
         # chance to reproduce nearby
-        if (( $(rand 100) < FOOD_REPRO_RATE_DAY )); then
+        local current_rate=$FOOD_REPRO_RATE_DAY
+        if (( $(has_water_neighbor "$i") == 1 )); then
+          current_rate=$(( current_rate + FOOD_WATER_BOOST ))
+        fi
+        if (( $(rand 100) < current_rate )); then
             target=$(choose_empty_neighbor "$i")
             if (( target >= 0 )); then
             food[$target]=1

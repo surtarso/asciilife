@@ -40,6 +40,7 @@ FOOD_START_RATIO=8       # roughly 12.5% of tiles start as food (lower=more)
 FOOD_MAX_AGE=48
 FOOD_REPRO_RATE=3
 FOOD_DAY_BOOST=5
+FOOD_WATER_BOOST=5
 FOOD_COLOR=32
 FOOD_SYMBOL="°"
 # FOOD_SYMBOL="🌿"

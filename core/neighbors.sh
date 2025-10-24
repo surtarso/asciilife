@@ -22,3 +22,14 @@ choose_empty_neighbor() {
   done
   (( ${#empties[@]} == 0 )) && echo -1 || echo "${empties[$(rand ${#empties[@]})]}"
 }
+
+has_water_neighbor() {
+  local i=$1 nlist=( $(neighbors "$i") ) has_water=0
+  for idxn in "${nlist[@]}"; do
+    if (( terrain[$idxn] == 1 )); then
+      has_water=1
+      break
+    fi
+  done
+  echo "$has_water"
+}
