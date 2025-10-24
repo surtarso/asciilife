@@ -46,9 +46,10 @@ FOOD_SYMBOL="°"
 # FOOD_SYMBOL="🌿"
 
 # Terrain parameters (unused)
-WATER_PCT=3             # Percentage of grid as water (adjust for density)
+WATER_PCT=2             # Percentage of grid as water (adjust for density)
 WATER_SYMBOL="~"         # Visual for water
 WATER_COLOR=34           # Blue ANSI color
+WATER_MOVE_CHANCE_PENALTY=15 # Penalty to movement chance near water
 
 # Day/Night
 DAY_LENGTH=24

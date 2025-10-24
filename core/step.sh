@@ -65,6 +65,11 @@ step() {
             fi
         fi
 
+        # Terrain penalty
+        if (( $(has_water_neighbor "$i") == 1 )); then
+          cur_move=$(( cur_move - WATER_MOVE_CHANCE_PENALTY ))
+        fi
+
         # clamp move chance to 1..100
         (( cur_move < 1 )) && cur_move=1
         (( cur_move > 100 )) && cur_move=100
