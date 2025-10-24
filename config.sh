@@ -1,0 +1,55 @@
+# config.sh
+
+# Simulation parameters
+TICK_SLEEP=0.12
+INIT_POPULATION=40
+MUTATION_RATE=8
+MUTATION_MAG=20
+MIN_REPRO=5
+MAX_REPRO=70
+MIN_MOVE=5
+MAX_MOVE=80
+MIN_AGE=8
+MAX_AGE=40
+
+# Metabolism & energy
+ENERGY_START=40
+ENERGY_MAX=80
+ENERGY_MOVE_COST=1
+ENERGY_IDLE_COST=0
+ENERGY_REPRO_COST=20
+ENERGY_EAT_GAIN=15
+
+# Herbivores
+HERBIVOR_SPEED_DAY=10    # adds to normal speed (cur_move + HERBIVOR_SPEED_DAY)
+HERBIVOR_SPEED_NIGHT=10  # subtracts from normal speed (cur_move - HERBIVOR_SPEED_NIGHT)
+# SYMBOLS=("🐇" "🐄" "🐐" "🐑" "🦌" "🦙")
+SYMBOLS=("Ø" "©" "ø" "ð" "®")
+COLORS=(33 35 36 37 38)
+
+# Predation
+PREDATOR_SPEED_DAY=10     # subtracts to normal speed (cur_move - PREDATOR_SPEED_DAY)
+PREDATOR_SPEED_NIGHT=15   # adds from normal speed (cur_move + PREDATOR_SPEED_NIGHT)
+PREDATOR_CHANCE=15
+PREDATOR_COLOR=31
+PREDATOR_SYMBOL=("«" "»")
+# PREDATOR_SYMBOL=("🐺")
+
+# Food parameters
+FOOD_START_RATIO=8       # roughly 12.5% of tiles start as food (lower=more)
+FOOD_MAX_AGE=48
+FOOD_REPRO_RATE=3
+FOOD_DAY_BOOST=5
+FOOD_COLOR=32
+FOOD_SYMBOL="°"
+# FOOD_SYMBOL="🌿"
+
+# Terrain parameters (unused)
+WATER_PCT=15             # Percentage of grid as water (adjust for density)
+WATER_SYMBOL="~"         # Visual for water
+WATER_COLOR=34           # Blue ANSI color
+
+# Day/Night
+DAY_LENGTH=24
+IS_DAY=1
+TICK_COUNT=0
