@@ -1,7 +1,11 @@
 # ASCII Life Simulator
 
 Autonomous ASCII life simulation written in pure Bash.  
-Simulates organisms with traits, reproduction, movement, energy metabolism, and predation in a terminal grid. There's still a lot to add and performs poorly. This is just for fun, works as a screensaver (that uses ~10% CPU). Results differ drastically depending on terminal window size.
+Simulates organisms with traits, reproduction, movement, energy metabolism, and predation in a terminal grid. There's still a lot to add and performs poorly. This is just for fun... works as a screensaver (that uses ~10% CPU). Results differ drastically depending on terminal window size.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5bdaf84c-0b44-46fc-b036-b899a1758f64" alt="image" width="700">
+</p>
 
 ---
 
