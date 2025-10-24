@@ -125,7 +125,7 @@ step() {
       # 3) Reproduction: maybe create a child in an empty neighboring cell
       local parent_repro_chance=$cur_repro # Use a temp variable for the check
       if (( IS_DAY == 0 )); then
-        parent_repro_chance=$(( cur_repro + (cur_repro / 2) )) # Example: 50% night boost
+        parent_repro_chance=$(( cur_repro + REPRO_NIGHT_BOOST )) # Example: 50% night boost
       fi
       # Clamp the temporary chance
       (( parent_repro_chance < 1 )) && parent_repro_chance=1

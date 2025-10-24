@@ -19,6 +19,7 @@ ENERGY_MOVE_COST=2
 ENERGY_IDLE_COST=1
 ENERGY_REPRO_COST=20
 ENERGY_EAT_GAIN=20
+REPRO_NIGHT_BOOST=15   # Additive percentage to reproduction chance at night
 
 # Herbivores
 HERBIVOR_SPEED_DAY=10    # adds to normal speed (cur_move + HERBIVOR_SPEED_DAY)
