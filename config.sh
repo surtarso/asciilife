@@ -39,7 +39,7 @@ PREDATOR_SYMBOL=("«" "»")
 
 # Food parameters
 FOOD_START_RATIO=8       # roughly 12.5% of tiles start as food (lower=more)
-FOOD_MAX_AGE=48
+FOOD_MAX_AGE=30
 FOOD_REPRO_RATE=3
 FOOD_DAY_BOOST=5
 FOOD_WATER_BOOST=5
@@ -48,7 +48,7 @@ FOOD_SYMBOL="°"
 # FOOD_SYMBOL="🌿"
 
 # Terrain parameters (unused)
-WATER_PCT=2             # Percentage of grid as water (adjust for density)
+WATER_PCT=1             # Percentage of grid as water (adjust for density)
 WATER_SYMBOL="~"         # Visual for water
 WATER_COLOR=34           # Blue ANSI color
 WATER_MOVE_CHANCE_PENALTY=15 # Penalty to movement chance near water
